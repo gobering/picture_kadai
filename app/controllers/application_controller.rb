@@ -8,4 +8,11 @@ class ApplicationController < ActionController::Base
   def login_required
     redirect_to new_session_path unless current_user
   end
+
+  def fobid_login_user
+    if @current_user
+      flash[:notice]="ログインしています"
+      redirect_to("/pictuers/index")
+    end
+  end
 end

@@ -6,6 +6,7 @@ class PicturesController < ApplicationController
   end
 
   def show
+    @favorite = current_user.favorites.find_by(picture_id: @picture.id)
   end
 
   def new
@@ -22,6 +23,7 @@ class PicturesController < ApplicationController
       render :new
     else
       if @picture.save
+        PictureMailer.picture_mail(@picture).deliver
         redirect_to pictures_path, notice: "投稿しました！"
       else
         render :new

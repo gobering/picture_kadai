@@ -6,7 +6,7 @@ Rails.application.configure do
 
   config.eager_load = false
 
-  config.consider_all_requests_local = false
+  config.consider_all_requests_local = true
 
   if Rails.root.join('tmp', 'caching-dev.txt').exist?
     config.action_controller.perform_caching = true
@@ -43,4 +43,8 @@ Rails.application.configure do
   config.assets.quiet = true
 
   config.file_watcher = ActiveSupport::EventedFileUpdateChecker
+  
+  config.action_mailer.default_url_options = { host: 'localhost:3000' }
+
+  config.action_mailer.delivery_method = :letter_opener_web
 end
