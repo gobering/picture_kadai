@@ -1,4 +1,4 @@
-<h1>Sign up</h1>
+<h1>プロフィール</h1>
 
 <% if @user.errors.any? %>
   <div id="error_explanation">
@@ -24,13 +24,10 @@
   <%= f.label :password_confirmation %>
   <%= f.password_field :password_confirmation %>
 
-  <br>
-  
   <%= f.label :picture %>
   <%= image_tag(@user.image.url) if @user.image && @user.image.url %>
   <%= f.file_field :image %>
   <%= f.hidden_field :image_cache %>
- 
 
   <%= f.submit "Create my account" %>
 <% end %>
