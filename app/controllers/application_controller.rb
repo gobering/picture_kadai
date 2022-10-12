@@ -15,4 +15,5 @@ class ApplicationController < ActionController::Base
       redirect_to("/pictuers/index")
     end
   end
+  
 end
