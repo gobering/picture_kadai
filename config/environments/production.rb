@@ -97,8 +97,7 @@ Rails.application.configure do
   # Do not dump schema after migrations.
   config.active_record.dump_schema_after_migration = false
 
-  config.action_mailer.default_url_options = { host: 'secret-dawn-61456.herokuapp.com.herokuapp.com'}
-  config.action_mailer.delivery_method = :letter_opener_web
+ 
   
 
   # Inserts middleware to perform automatic connection switching.
