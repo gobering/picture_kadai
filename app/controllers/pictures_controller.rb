@@ -19,7 +19,6 @@ class PicturesController < ApplicationController
 
   def create
     @picture = current_user.pictures.build(picture_params)
-
     if params[:back]
       render :new
     else
