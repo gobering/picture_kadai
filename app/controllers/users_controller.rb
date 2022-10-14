@@ -1,6 +1,7 @@
 class UsersController < ApplicationController
-  skip_before_action :login_required, only: [:new, :create, :edit, :update]
+  skip_before_action :login_required, only: [:new, :create, :edit, :update, :destroy]
   before_action :set_user, only: %i[ show edit update destroy ]
+  before_action :correct_user, only: %i[ edit update destroy ]
 
   def index
     @users = User.all
@@ -54,6 +55,13 @@ class UsersController < ApplicationController
 
   def user_params
     params.require(:user).permit(:name, :email, :password, :password_digest, :password_confirmation, :image_cache, :image)
+  end
+
+  def correct_user
+    unless User.find(params[:id]).user.id.to_i == current_user.id
+        redirect_to pictures_path(current_user)
+        flash[:notice] = "権限がありません"
+    end
   end
   
 end
