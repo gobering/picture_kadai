@@ -50,7 +50,7 @@ class UsersController < ApplicationController
 
   def set_user
     @user = User.find(params[:id])
-    redirect_to users_path, notice: "勝手にいじんな" unless @user.name == current_user.name
+    redirect_to new_user_path, notice: "勝手にいじんな" unless @user.name == current_user.name
   end
 
   def user_params
