@@ -1,8 +1,9 @@
 ---
 ja:
   tasks:
-    title: タイトル
-    content: 詳細
+    new:
+      title: タイトル
+      content: 詳細
   activerecord:
     errors:
       messages:
