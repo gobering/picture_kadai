@@ -10,7 +10,7 @@ RSpec.describe Task, type: :model do
     end
     context 'タスクの詳細が空の場合' do
       it 'バリデーションにひっかかる' do
-        task1 = Task.new(title: '', content: '')
+        task1 = Task.new(title: 'aiueo', content: '')
         expect(task1).not_to be_valid
       end
     end
