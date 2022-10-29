@@ -23,6 +23,10 @@
     <%= form.label :終了期限 %>
     <%= form.date_select :deadline %>
   </div>
+  <div class="task_title">
+    <%= form.label :終了期限 %>
+    <%= form.select :status, [["未着手", "未着手"], ["着手中", "着手中"], ["完了", "完了"]], include_blank: "選択して下さい" %>
+  </div>
   <%= form.submit %>
 <% end %>
 
