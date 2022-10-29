@@ -3,6 +3,6 @@ class Task < ApplicationRecord
   validates :content, presence: true
   validates :status, presence: true
   enum status: {
-    未着手:未着手, 着手中:着手中, 完了:完了
+    未着手:0, 着手中:1, 完了:2
   }
 end
