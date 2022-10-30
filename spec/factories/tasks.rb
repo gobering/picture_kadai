@@ -3,6 +3,7 @@ FactoryBot.define do
     title { 'abcde' }
     content { '小文字のABCDE' }
     deadline { '2022-11-11' }
+    status { '未着手' }
   end
 
   factory :second_task, class: Task do

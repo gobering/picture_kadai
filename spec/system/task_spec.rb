@@ -2,11 +2,35 @@ require 'rails_helper'
 RSpec.describe 'タスク管理機能', type: :system do
 
   describe '新規作成機能' do
+    before do
+      task = FactoryBot.create(:task)
+    end
     context 'タスクを新規作成した場合' do
       it '作成したタスクが表示される' do
-        task = FactoryBot.create(:task)
         visit tasks_path
         expect(page).to have_content '小文字のABCDE'
+      end
+    end
+    context 'タイトルであいまい検索をした場合' do
+      it "検索キーワードを含むタスクで絞り込まれる" do
+        visit tasks_path
+        click_on '検索'
+        expect(page).to have_content 'abcde'
+      end
+    end
+    context 'ステータス検索をした場合' do
+      it "ステータスに完全一致するタスクが絞り込まれる" do
+        visit tasks_path
+        click_on '検索'
+        expect(page).to have_content '未着手'
+      end
+    end
+    context 'タイトルのあいまい検索とステータス検索をした場合' do
+      it "検索キーワードをタイトルに含み、かつステータスに完全一致するタスク絞り込まれる" do
+        visit tasks_path
+        click_on '検索'
+        expect(page).to have_content 'abcde'
+        expect(page).to have_content '未着手'
       end
     end
   end
@@ -30,6 +54,7 @@ RSpec.describe 'タスク管理機能', type: :system do
       it '終了期限が近いタスクが一番上に表示される' do
         task = FactoryBot.create(:task)
         visit tasks_path
+        click_on '終了期限でソートする'
         task_list = all('.task_list_2') 
         expect(task_list[0]).to have_content '2022-11-11' 
       end
