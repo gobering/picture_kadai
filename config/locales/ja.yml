@@ -4,6 +4,8 @@ ja:
     new:
       title: タイトル
       content: 詳細
+      status: ステータス
+      priority: 優先順位
   activerecord:
     errors:
       messages:
