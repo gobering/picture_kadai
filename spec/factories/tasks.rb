@@ -9,5 +9,7 @@ FactoryBot.define do
   factory :second_task, class: Task do
     title { 'アイウエオ' }
     content { 'カタカナのあいうえお' }
+    deadline { '2022-11-11' }
+    status { '未着手' }
   end
 end

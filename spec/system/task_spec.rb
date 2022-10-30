@@ -3,7 +3,8 @@ RSpec.describe 'タスク管理機能', type: :system do
 
   describe '新規作成機能' do
     before do
-      task = FactoryBot.create(:task)
+      FactoryBot.create(:task, title: "task")
+      FactoryBot.create(:second_task, title: "sample")
     end
     context 'タスクを新規作成した場合' do
       it '作成したタスクが表示される' do
@@ -14,13 +15,15 @@ RSpec.describe 'タスク管理機能', type: :system do
     context 'タイトルであいまい検索をした場合' do
       it "検索キーワードを含むタスクで絞り込まれる" do
         visit tasks_path
+        fill_in 'task[title]', with: 'ta'
         click_on '検索'
-        expect(page).to have_content 'abcde'
+        expect(page).to have_content 'task'
       end
     end
     context 'ステータス検索をした場合' do
       it "ステータスに完全一致するタスクが絞り込まれる" do
         visit tasks_path
+        select '未着手', from: "task[status]"
         click_on '検索'
         expect(page).to have_content '未着手'
       end
@@ -28,8 +31,10 @@ RSpec.describe 'タスク管理機能', type: :system do
     context 'タイトルのあいまい検索とステータス検索をした場合' do
       it "検索キーワードをタイトルに含み、かつステータスに完全一致するタスク絞り込まれる" do
         visit tasks_path
+        fill_in 'task[title]', with: 'task'
+        select '未着手', from: "task[status]"
         click_on '検索'
-        expect(page).to have_content 'abcde'
+        expect(page).to have_content 'task'
         expect(page).to have_content '未着手'
       end
     end
