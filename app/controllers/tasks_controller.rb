@@ -10,7 +10,13 @@ class TasksController < ApplicationController
     end
 
     if params[:task].present?
-      @tasks = @tasks.where('title LIKE ?', "%#{params[:task][:title]}%")
+      if params[:task][:title].present? && params[:task][:status].present?
+        @tasks = @tasks.where('title LIKE ?', "%#{params[:task][:title]}%").where(status: params[:task][:status])
+      elsif params[:task][:title].present?
+        @tasks = @tasks.where('title LIKE ?', "%#{params[:task][:title]}%")
+      elsif params[:task][:status].present?
+        @tasks = @tasks.where(status: params[:task][:status])
+      end
     end
   end
 
