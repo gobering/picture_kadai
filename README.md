@@ -13,7 +13,7 @@ Taskモデル
 | title           | string   |
 | content         | string   |
 | deadline        |  date    |
-| status          | string   |
+| status          | integer   |
 | priority        | string   |
 | user_id         | references   |
 
