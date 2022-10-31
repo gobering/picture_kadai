@@ -2,7 +2,7 @@ class TasksController < ApplicationController
   before_action :set_task, only: [:show, :edit, :update, :destroy]
   
   def index
-    @tasks = Task.all.page(params[:page]).per(2)
+    @tasks =  current_user.tasks.page(params[:page]).per(2)
     if params[:task].present?
       if params[:task][:title].present? && params[:task][:status].present?
         @tasks = @tasks.search_title(params[:task][:title]).search_status(params[:task][:status])
