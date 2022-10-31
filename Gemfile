@@ -33,9 +33,9 @@ group :test do
 end
 
 gem 'tzinfo-data', platforms: [:mingw, :mswin, :x64_mingw, :jruby]
-
 gem 'net-smtp'
 gem 'net-imap'
 gem 'net-pop'
-
 gem 'kaminari'
+gem 'bootstrap', '~> 4.4.1'
+gem 'jquery-rails'
