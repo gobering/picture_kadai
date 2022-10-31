@@ -3,4 +3,5 @@ class User < ApplicationRecord
   validates :email, uniqueness: true, presence: true, length:{maximum:50}
   before_validation { email.downcase! }
   validates :password, presence: true
+  has_many :tasks
 end
