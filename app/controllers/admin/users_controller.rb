@@ -10,10 +10,19 @@ class Admin::UsersController < ApplicationController
   def create
     @user = User.new(user_params)
     if @user.save
-      redirect_to admin_user_path(@user), notice: "ユーザー#{@user.name}を登録しました"
+      redirect_to admin_users_path(@user)
     else
       render :new
     end
+  end
+
+  def show
+  end
+
+  def edit
+  end
+
+  def destroy
   end
 
   private
