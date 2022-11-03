@@ -1,7 +1,7 @@
 class Admin::UsersController < ApplicationController
   before_action :set_user, only: %i[ show edit update destroy ]
   # before_action :require_admin
-  before_action user_admin, only: [:index]
+  # before_action user_admin, only: [:index]
 
   def index
     @users = User.all.includes(:tasks)
@@ -50,7 +50,7 @@ class Admin::UsersController < ApplicationController
     
 
   def user_params
-    params.require(:user).permit(:name, :email, :password, :password_confirmation)
+    params.require(:user).permit(:name, :email, :password, :password_confirmation, :admin)
   end
 
   # def require_admin
