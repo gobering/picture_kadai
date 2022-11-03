@@ -1,5 +1,6 @@
 class Admin::UsersController < ApplicationController
   before_action :set_user, only: %i[ show edit update destroy ]
+  before_action :require_admin
 
   def index
     @users = User.all.includes(:tasks)
@@ -46,5 +47,11 @@ class Admin::UsersController < ApplicationController
 
   def user_params
     params.require(:user).permit(:name, :email, :password, :password_confirmation)
+  end
+
+  def require_admin
+    unless current_user.admin?
+      redirect_to tasks_path, notice: "あなたは管理者ではありません"
+    end
   end
 end
