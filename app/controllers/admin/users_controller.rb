@@ -1,6 +1,7 @@
 class Admin::UsersController < ApplicationController
   before_action :set_user, only: %i[ show edit update destroy ]
-  before_action :require_admin
+  # before_action :require_admin
+  before_action user_admin, only: [:index]
 
   def index
     @users = User.all.includes(:tasks)
@@ -29,13 +30,16 @@ class Admin::UsersController < ApplicationController
     if @user.update(user_params)
       redirect_to admin_user_path(@user), notice: "ユーザー情報を更新しました"
     else
-      redirect_to edit_admin_user_path(@user)
+      redirect_to edit_admin_user_path(@user), notice: "管理者がいなくなるのでダメです"
     end
   end
 
   def destroy
-    @user.destroy
-    redirect_to admin_users_path, notice: "ユーザー情報を消去しました"
+    if @user.destroy
+      redirect_to admin_users_path, notice: "ユーザー情報を消去しました"
+    else
+      redirect_to admin_users_path, notice: "管理者がいなくなるのでダメです"
+    end
   end
 
   private
@@ -49,9 +53,18 @@ class Admin::UsersController < ApplicationController
     params.require(:user).permit(:name, :email, :password, :password_confirmation)
   end
 
-  def require_admin
-    unless current_user.admin?
-      redirect_to tasks_path, notice: "あなたは管理者ではありません"
+  # def require_admin
+  #   unless current_user.admin?
+  #     redirect_to tasks_path, notice: "管理者以外はアクセスできない"
+  #   end
+  # end
+
+  def user_admin
+    @users = User.all
+    if  current_user.admin == false
+        redirect_to tasks_path
+    else
+        render action: "index"
     end
-  end
+ end
 end
