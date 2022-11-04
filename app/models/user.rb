@@ -12,14 +12,14 @@ class User < ApplicationRecord
 
   def admin_user_update_action
     @admin_user = User.where(admin: true)
-    if (@admin_user.count == 1 && @admin_user.first == self) && !(self.admin)      
+    if User.where(admin: true).count == 1 && self.admin == false
       throw(:abort)        
     end
   end
 
 
   def admin_user_destroy_action
-    if User.where(admin: true).count == 1 && self.admin
+    if User.where(admin: true).count <= 1 && self.admin == true
       throw(:abort)
     end
   end   
