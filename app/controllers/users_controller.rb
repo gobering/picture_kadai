@@ -1,5 +1,6 @@
 class UsersController < ApplicationController
   skip_before_action :login_required
+  before_action :collect_user, only: [:show, :edit, :update]
   def new
     redirect_to user_path(current_user.id) if logged_in?
     @user = User.new
@@ -16,7 +17,6 @@ class UsersController < ApplicationController
   end
 
   def show
-    redirect_to tasks_path unless params[:id] == current_user.id.to_s
     @user = User.find(params[:id])
     @tasks = @user.tasks
   end
@@ -28,7 +28,7 @@ class UsersController < ApplicationController
   def update
     @user = User.find(params[:id])
     if @user.update(user_params)
-      redirect_to user_path(@user.id), notice: "投稿を編集しました！"
+      redirect_to user_path(@user.id), notice: "編集しました！"
     else
       render :edit
     end
@@ -40,4 +40,8 @@ class UsersController < ApplicationController
     params.require(:user).permit(:name, :email, :password, :password_confirmation)
   end
 
+  def collect_user
+    @user = User.find(params[:id])
+    redirect_to tasks_path unless @user == current_user
+  end
 end

@@ -7,3 +7,5 @@
                password: password,
                )
 end
+
+User.create!(name: "aiueo", email: "aiueo@gmail.com", password: "123456", admin: true)
