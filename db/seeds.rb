@@ -8,4 +8,4 @@
                )
 end
 
-User.create!(name: "aiueo", email: "aiueo@gmail.com", password: "123456", admin: true)
+User.create!(name: "aiueo", email: "aiueodayo@gmail.com", password: "123456", admin: true)
