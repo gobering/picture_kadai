@@ -31,27 +31,6 @@ ja:
               blank: "を入力してください"
             status:
               blank: "を入力してください" 
-  users:            
-    models:
-      user: "ユーザー"
-    attributes:
-      task:
-        name: "名前"
-        email: "Eメール" 
-        password: "パスワード"
-        password_confirmation: "パスワード確認"
-    errors:
-      models:
-        user:
-          attributes:
-            name: 
-              blank: "を入力してください"
-            email:
-              blank: "を入力してください"
-            password:
-              blank: "を入力してください"
-            password_confirmation:
-              blank: "を入力してください"
     errors:
       messages:
         record_invalid: 'バリデーションに失敗しました: %{errors}'
