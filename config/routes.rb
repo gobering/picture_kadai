@@ -1,6 +1,6 @@
 Rails.application.routes.draw do
   get 'sessions/new'
-  root "tasks#index"
+  root "sessions#new"
   get "/" => "tasks#index"
   resources :tasks 
   namespace :admin do
