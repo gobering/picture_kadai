@@ -1,7 +1,26 @@
 class User < ApplicationRecord
   validates :name, presence: true
-  validates :email, presence: true, length:{maximum:50}
-              #  format: { with: /\A[\w+\-.]+@[a-z\d\-.]+\.[a-z]+\z/i }
+  validates :email, uniqueness: true, presence: true, length:{maximum:50}
   before_validation { email.downcase! }
-  validates :password, presence: true
+  has_secure_password
+  validates :password, length: { minimum: 6 }
+  has_many :tasks, dependent: :destroy
+  before_destroy :admin_user_destroy_action
+  before_update :admin_user_update_action
+
+  private
+
+  def admin_user_update_action
+    @admin_user = User.where(admin: true)
+    if User.where(admin: true).count == 1 && self.admin == false
+      throw(:abort)        
+    end
+  end
+
+
+  def admin_user_destroy_action
+    if User.where(admin: true).count <= 1 && self.admin == true
+      throw(:abort)
+    end
+  end   
 end

@@ -22,7 +22,7 @@ end
 
 group :development do
   gem 'web-console', '>= 4.1.0'
-  gem 'rack-mini-profiler', '~> 2.0'
+  gem 'rack-mini-profiler', '~> 2.0', require: false
   gem 'listen', '~> 3.3'
   gem 'spring'
 end
@@ -33,9 +33,11 @@ group :test do
 end
 
 gem 'tzinfo-data', platforms: [:mingw, :mswin, :x64_mingw, :jruby]
+gem 'faker'
 gem 'net-smtp'
 gem 'net-imap'
 gem 'net-pop'
 gem 'kaminari'
 gem 'bootstrap', '~> 4.4.1'
 gem 'jquery-rails'
+gem 'bcrypt'
