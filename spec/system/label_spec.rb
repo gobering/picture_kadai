@@ -19,5 +19,25 @@ RSpec.describe 'タスク管理機能', type: :system do
         expect(page).to have_content '運動'
       end
     end
+    context 'タスクにラベルをつける事ができる' do
+      it 'タスク新規作成時にラベルをつける事ができる' do
+        visit new_task_path
+        fill_in 'task[title]',with: 'アイウエオ'
+        fill_in 'task[content]',with: 'かきくけこ'
+        select '未着手', from: "task[status]"
+        select '中', from: "task[priority]"
+        check "task_label_ids_#{(@label.id)}"
+        click_on '登録する'
+        expect(page).to have_content '睡眠'
+      end
+    end
+    context 'ラベルで絞り込んで検索した場合' do
+      it "ラベルで検索が絞り込まれる" do
+        visit tasks_path
+        select "睡眠", from: "task[label_id]"
+        click_on '検索'
+        expect(page).to have_content '睡眠'
+      end
+    end
   end
 end
