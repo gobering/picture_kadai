@@ -11,8 +11,7 @@ class TasksController < ApplicationController
       elsif params[:task][:status].present?
         @tasks = @tasks.search_status(params[:task][:status])
       elsif params[:task][:label_id].present?
-        @task_labels = TaskLabel.where(label_id: params[:task][:label_id]).pluck(:task_id)
-        @tasks = @tasks.where(id: @task_labels)
+        @tasks = @tasks.joins(:labels).where(labels: { id: params[:task][:label_id] })
       end
     end
 
