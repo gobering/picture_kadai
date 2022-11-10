@@ -18,8 +18,9 @@ end
   Task.create!(
   user_id: t + 1,
   title: "title#{t+1}",
+  deadline: "2022/11/11",
   content: "content",
-  status: "未着手"
+  status: "未着手",
   priority: "高"
   )
 end
