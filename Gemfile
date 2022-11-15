@@ -17,6 +17,8 @@ gem 'carrierwave'
 gem 'mini_magick'
 gem 'faker'
 gem 'rexml'
+gem 'fog-aws'
+gem 'dotenv-rails' 
 
 gem 'net-smtp'
 gem 'net-imap'
