@@ -59,5 +59,5 @@
 #     auth_methods: %w(publickey password)
 #     # password: "please use keys"
 #   }
-server '43.206.38.206 ', user: 'app', roles: %w{app db web}
+server '43.206.38.206', user: 'app', roles: %w{app db web}
 set :ssh_options, keys: '/Users/ebisuisho/.ssh/id_rsa'
